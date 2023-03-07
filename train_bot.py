@@ -57,5 +57,33 @@ print(stem_words)
 print(classes)
 
 # Crie um saco de palavras 
+# Crie um saco de palavras e o labels_encoding
+for word_tags in word_tags_list:
+        
+        bag_of_words = []       
+        pattern_words = word_tags[0]
+       
+        for word in pattern_words:
+            index=pattern_words.index(word)
+            word=stemmer.stem(word.lower())
+            pattern_words[index]=word  
+
+        for word in stem_words:
+            if word in pattern_words:
+                bag_of_words.append(1)
+            else:
+                bag_of_words.append(0)
+        print(bag_of_words)
+
+        labels_encoding = list(labels) #inicialmente, labels será toda zerada
+        tag = word_tags[1] #salve a tag
+        tag_index = classes.index(tag)  #vá para o índice da tag
+        labels_encoding[tag_index] = 1  #anexe 1 àquele índice
+       
+        training_data.append([bag_of_words, labels_encoding])
+
+print(training_data[0])
 
 # Crie os dados de treinamento
+def preprocess_train_data(training_data):
+    
